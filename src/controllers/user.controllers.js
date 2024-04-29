@@ -1,7 +1,7 @@
 import path from "path";
-import addSkater from "../queries/user.queries.js"
-const __dirname = import.meta.dirname;
-
+import { addSkater } from "../../queries/user.queries.js";
+import jwt from "jsonwebtoken";
+const __dirname = path.resolve();
 
 //ruta principal
 const homePage = (req, res) => {
@@ -11,7 +11,7 @@ const homePage = (req, res) => {
 //registro
 const register = (req, res) => {
   res.render("Registro");
-}
+};
 
 //skaters
 
@@ -22,8 +22,7 @@ const skaterController = async (req, res) => {
   const { foto } = files;
   const { name } = foto;
   const pathPhoto = `/uploads/${name}`;
-  const absolutePath = path.join(__dirname, "../public", pathPhoto);
-  foto.mv(absolutePath, async (err) => {
+  foto.mv(`${__dirname}/public${pathPhoto}`, async (err) => {
     try {
       if (err) throw err;
       skater.foto = pathPhoto;
@@ -33,13 +32,15 @@ const skaterController = async (req, res) => {
       res.status(500).send(error.message);
     }
   });
-};
+}
 
+const loginController = async (req, res) => {
+  res.render("Login"); 
+}
 
 //ruta generica
 const rutaGenerica = (req, res) => {
   res.send("error 404");
-};  
+};
 
-
-export { homePage, register, skaterController, rutaGenerica };
+export { homePage, register, skaterController,loginController, rutaGenerica };

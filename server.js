@@ -6,8 +6,9 @@ import fileUpload from "express-fileupload";
 process.loadEnvFile();
 const app = express();
 const PORT = process.env.PORT || 3033;
-const __dirname = import.meta.dirname;
+const __dirname = path.resolve();
 
+app.use(express.json());
 //carpetos publicas
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "views")));
@@ -30,8 +31,7 @@ app.engine (
     })
 );
 //Data FORM/BODY
-app.use(express.urlencoded({ extended: false}));
-app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(router);
 
 app.listen(PORT, () =>

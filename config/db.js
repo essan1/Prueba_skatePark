@@ -17,6 +17,4 @@ allowExitOnIdle: true
 
 const db = new Pool(config);
 
-
-
 export default db;
