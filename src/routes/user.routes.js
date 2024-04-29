@@ -1,11 +1,16 @@
 import express from "express";
+import {
+  homePage,
+  register,
+  skaterController,
+} from "../controllers/user.controllers.js";
 const router = express.Router();
 
 //ruta principal
 
-router.get("/", (req, res) => {
-  res.send("hola");
-});
+router.get("/", homePage);
+router.get("/registro", register )
+router.post("/skaters", skaterController);
 
 //creamos nuestra ruta generica, simeprea al final
 router.get("*", (req, res) => {
