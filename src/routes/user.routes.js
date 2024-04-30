@@ -9,6 +9,8 @@ import {
   profileUpdate,
   updateProfile,
   deleteAccount,
+  updateStatus,
+  updateSkaterStatus
 } from "../controllers/user.controllers.js";
 const router = express.Router();
 
@@ -23,6 +25,8 @@ router.post("/login", logController)
 router.get("/perfil", profileUpdate);
 router.delete("/skaters/:id", deleteAccount);
 router.put("/perfil/:id", updateProfile);
+router.get("/admin", updateStatus);
+router.put("/skaters/status/:id", updateSkaterStatus);
 
 
 //creamos nuestra ruta generica, simeprea al final

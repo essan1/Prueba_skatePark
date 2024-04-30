@@ -38,20 +38,21 @@
 
 
 <script>
-  const changeStatus = async (id, e) => {
-
-    const estado = e.checked
-    try {
-      await axios.put(`/skaters/status/${id}`, {
-        estado
-      })
-      alert(estado ? "Skater aprobado!" : "Skater En revisión")
-    } catch ({ response }) {
-      const { data } = response
-      const { error } = data
-      alert(error)
+const changeStatus = async (id, e) => {
+  const estado = e.checked;
+  try {
+    const response = await axios.put(`/skaters/status/${id}`, { estado });
+    if (response.data.estado === estado) {
+      alert(estado ? "Skater aprobado!" : "Skater En revisión");
+    } else {
+      throw new Error("Error al actualizar estado!");
     }
-
+  } catch ({ response }) {
+    const { data } = response;
+    const { message } = data;
+    alert(message);
   }
+};
+
 
 </script>

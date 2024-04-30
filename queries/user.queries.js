@@ -39,10 +39,10 @@ const logInQuery = async (email, password) => {
 };
 
 
-// Consulta para actualizar el perfil del usuario
+
 const updateSkater = async (id, updatedFields) => {
   try {
-    const { nombre, password, años_experiencia, especialidad } = updatedFields; // Desestructurar updatedFields
+    const { nombre, password, años_experiencia, especialidad } = updatedFields; 
     const updateQuery = {
       text: `UPDATE skaters SET nombre = $1, password = $2, anos_experiencia = $3, especialidad = $4 WHERE id = $5`,
       values: [nombre, password, años_experiencia, especialidad, id],
@@ -50,13 +50,12 @@ const updateSkater = async (id, updatedFields) => {
 
     await db.query(updateQuery);
   } catch (error) {
-    console.error("Error en updateSkater:", error); // Agregar este registro de error
-    throw new Error("Error al actualizar el perfil del usuario");
+    console.error("Error en updateSkater:", error);
+    throw new Error("Error al actualizar");
   }
 };
 
 
-// Consulta para eliminar la cuenta del usuario
 const deleteSkater = async (id) => {
   try {
     const deleteQuery = {
@@ -66,9 +65,43 @@ const deleteSkater = async (id) => {
 
     await db.query(deleteQuery);
   } catch (error) {
-    throw new Error("Error al eliminar la cuenta del usuario");
+    throw new Error("Error al eliminar la cuenta");
   }
 };
 
+const adminSkaters = async () => {
+  try {
+    const getQuery = {
+      text: `SELECT * FROM skaters`,
+    };
 
-export { addSkater, getSkater, logInQuery, updateSkater, deleteSkater };
+    const { rows } = await db.query(getQuery);
+    return rows;
+  } catch (error) {
+    console.error("Error en getAllSkaters:", error);
+    throw new Error("Error al obtener los skaters");
+  }
+};
+
+const adminUpdateSkater = async (id, estado) => {
+  const updateQuery = {
+    text: `UPDATE skaters SET estado = $1 WHERE id = $2 RETURNING estado`,
+    values: [estado, id],
+  };
+
+  const { rows } = await db.query(updateQuery);
+  return rows[0].estado;
+};
+
+
+
+
+export {
+  addSkater,
+  getSkater,
+  logInQuery,
+  updateSkater,
+  deleteSkater,
+  adminSkaters,
+  adminUpdateSkater,
+};

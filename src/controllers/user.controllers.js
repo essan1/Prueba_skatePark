@@ -4,14 +4,14 @@ import {
   getSkater,
   logInQuery,
   updateSkater,
-  deleteSkater
+  deleteSkater,
+  adminSkaters,
+  adminUpdateSkater,
 } from "../../queries/user.queries.js";
 import jwt from "jsonwebtoken";
 const __dirname = path.resolve();
 process.loadEnvFile();
 const secretKey = process.env.SECRET_KEY;
-
-
 
 //ruta principal
 const homePage = (req, res) => {
@@ -42,16 +42,16 @@ const addskaterController = async (req, res) => {
       res.status(500).send(error.message);
     }
   });
-}
+};
 
 const getSkaterController = async (req, res) => {
   const skaters = await getSkater();
-  res.render("Home", {skaters});
-}
+  res.render("Home", { skaters });
+};
 
 const loginController = async (req, res) => {
-  res.render("Login"); 
-}
+  res.render("Login");
+};
 
 const logController = async (req, res) => {
   try {
@@ -79,7 +79,6 @@ const profileUpdate = async (req, res) => {
   }
 };
 
-
 const deleteAccount = async (req, res) => {
   try {
     const { id } = req.params;
@@ -96,16 +95,37 @@ const updateProfile = async (req, res) => {
     const { nombre, password, años_experiencia, especialidad } = req.body;
     const updatedFields = { nombre, password, años_experiencia, especialidad };
     await updateSkater(id, updatedFields);
-    res.status(200).json({ message: "Update successful" });
+    res.status(200).json({ message: "Datos actualizados" });
   } catch (error) {
     console.error("Error en updateProfile:", error);
     res.status(500).send(error.message);
   }
 };
 
+const updateStatus = async (req, res) => {
+  try {
+    const skaters = await adminSkaters();
+    res.render("Admin", { skaters });
+  } catch (error) {
+    console.error("Error en GET /admin:", error);
+    res.status(500).send(error.message);
+  }
+};
 
+const updateSkaterStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { estado } = req.body;
 
-
+    const updatedEstado = await adminUpdateSkater(id, estado);
+    res
+      .status(200)
+      .json({ message: "Update successful", estado: updatedEstado });
+  } catch (error) {
+    console.error("Error en updateSkaterStatus:", error);
+    res.status(500).send({ message: error.message });
+  }
+};
 
 //ruta generica
 const rutaGenerica = (req, res) => {
@@ -120,9 +140,9 @@ export {
   getSkaterController,
   logController,
   profileUpdate,
-
-updateProfile,
-deleteAccount,
-
+  updateProfile,
+  deleteAccount,
+  updateStatus,
+  updateSkaterStatus,
   rutaGenerica,
 };

@@ -3,7 +3,6 @@
     <hr class="w-50" />
 
     <form id="profileForm" method="PUT">
-        <!-- Agregar un campo oculto para el ID del usuario -->
         <input type="hidden" name="id" value="{{user.id}}">
 
         <div class="form-group row w-50 m-auto">
@@ -33,7 +32,6 @@
             </div>
         </div>
         <div class="mb-1">
-            <!-- Modificar el botón de "Actualizar" para enviar el formulario -->
             <button type="submit" class="btn btn-primary" id="updateBtn">Actualizar</button>
         </div>
     </form>
@@ -64,7 +62,7 @@
         const response = await axios.put(`/perfil/${skater.id}`, skater);
         if (response.status === 200) {
             alert("Datos actualizados con éxito");
-            window.location.href = "/"; // Redirect to home page
+            window.location.href = "/";
         }
     } catch (error) {
         alert(error.message);

@@ -34,10 +34,15 @@
       const { data: token } = await axios.post("/login", { email, password })
       window.location = `/Perfil?token=${token}`
     } catch ({ response }) {
-      const { data } = response
-      const { error } = data
-      alert(error)
-    }
+  const { data } = response;
+  let errorMessage = data.error;
+  if (!errorMessage) {
+    errorMessage = data.message || 'Verifica tu mail o password e intentalo nuevamente';
+  }
+
+  alert(errorMessage);
+}
+
 
   })
 </script>
