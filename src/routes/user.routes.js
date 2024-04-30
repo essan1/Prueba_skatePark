@@ -5,6 +5,10 @@ import {
   addskaterController,
   getSkaterController,
   loginController,
+  logController,
+  profileUpdate,
+  updateProfile,
+  deleteAccount,
 } from "../controllers/user.controllers.js";
 const router = express.Router();
 
@@ -15,6 +19,11 @@ router.get("/registro", register )
 router.post("/skaters", addskaterController);
 router.get("/login", loginController);
 router.get("/skaters", getSkaterController);
+router.post("/login", logController)
+router.get("/perfil", profileUpdate);
+router.delete("/skaters/:id", deleteAccount);
+router.put("/perfil/:id", updateProfile);
+
 
 //creamos nuestra ruta generica, simeprea al final
 router.get("*", (req, res) => {
