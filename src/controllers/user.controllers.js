@@ -129,7 +129,32 @@ const updateSkaterStatus = async (req, res) => {
 
 //ruta generica
 const rutaGenerica = (req, res) => {
-  res.send("error 404");
+  res.status(404);
+  res.send(`
+    <!doctype html>
+    <html lang="es">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+      <title>404 - Página no encontrada</title>
+      </head>
+      <body>
+        <div class="container">
+          <div class="row justify-content-center align-items-center" style="height: 100vh;">
+            <div class="col-6 text-center">
+              <h1 class="display-1">404</h1>
+              <h2>Página no encontrada</h2>
+              <p class="lead">Lo sentimos, la página que estás buscando no existe.</p>
+              <a href="/" class="btn btn-primary">Volver a la página principal</a>
+            </div>
+          </div>
+        </div>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      </body>
+    </html>
+  `);
 };
 
 export {

@@ -1,6 +1,6 @@
 body {
-  background: #ffdc43;
-  color: #4a4a4a;
+  background: #3b6edd;
+  color: #d0d0d0;
   text-shadow: 0px 0px 1px black;
   font-family: sans-serif;
   text-align: center;
@@ -21,9 +21,8 @@ td div {
 }
 
 a {
-  color: black;
-    text-decoration: none;
-
+  color: rgb(181, 237, 26);
+  text-decoration: none;
 }
 a:hover {
   text-decoration: none;
@@ -31,4 +30,18 @@ a:hover {
 
 input {
   text-align: center;
+}
+
+#web-title {
+  font-family: "Jersey 25", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#web-subtitle {
+  font-family: "Reddit Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+
 }

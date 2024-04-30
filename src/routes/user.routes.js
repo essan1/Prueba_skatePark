@@ -10,7 +10,8 @@ import {
   updateProfile,
   deleteAccount,
   updateStatus,
-  updateSkaterStatus
+  updateSkaterStatus,
+  rutaGenerica
 } from "../controllers/user.controllers.js";
 const router = express.Router();
 
@@ -29,13 +30,8 @@ router.get("/admin", updateStatus);
 router.put("/skaters/status/:id", updateSkaterStatus);
 
 
-//creamos nuestra ruta generica, simeprea al final
-router.get("*", (req, res) => {
-  res.status(404);
-  res.send(
-    "<h1><center>404 ERROR -- Pagina No Encontrada</center></h1><p><center><a href='/'>Ir a la página principal</a></center></p>"
-  );
-});
+//*
+router.get("*", rutaGenerica);
 
 
 export default router;
