@@ -16,6 +16,19 @@ const addSkater = async (skater) => {
   }
 };
 
-export {
-  addSkater,
-};
+const getSkater = async (req, res) => {
+  try {
+    const skatersQuery = {
+      text: "select * from skaters",
+    }
+    const result = await db.query(skatersQuery);
+    console.log(result.rows);
+    return result.rows;
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+
+
+export { addSkater, getSkater };
