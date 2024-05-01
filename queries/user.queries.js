@@ -94,8 +94,6 @@ const adminUpdateSkater = async (id, estado) => {
 };
 
 
-
-
 export {
   addSkater,
   getSkater,

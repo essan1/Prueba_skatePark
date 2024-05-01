@@ -58,10 +58,10 @@ const logController = async (req, res) => {
     const { email, password } = req.body;
     const result = await logInQuery(email, password);
     if (result.length === 0) {
-      throw new Error("Usuario no encontrado");
+      throw new Error("Correo electrónico o contraseña incorrectos");
     }
     const user = result[0];
-    const token = jwt.sign({ user }, secretKey, { expiresIn: "10m" });
+    const token = jwt.sign({ user }, secretKey, { expiresIn: "5m" });
     res.status(200).send(token);
   } catch (error) {
     res.status(500).send(error.message);
